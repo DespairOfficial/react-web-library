@@ -1,0 +1,6 @@
+.header{
+    background: #4D636F;
+    color: white;
+    grid-area: header;
+    margin-bottom: 10px;
+}
