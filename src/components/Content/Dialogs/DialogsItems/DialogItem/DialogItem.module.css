@@ -1,0 +1,7 @@
+.dialogItem{
+    text-decoration: none;
+    color: black
+}
+.active{
+    color: bisque
+}

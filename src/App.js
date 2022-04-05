@@ -1,22 +1,21 @@
-import React from "react";
+import React from 'react'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
 import Content from './components/Content/Content'
 import Sidebar from './components/Sidebar/SideBar'
-import {BrowserRouter} from 'react-router-dom'
-import store from './redux/state'
+import { BrowserRouter } from 'react-router-dom'
 
-function App() {
-  return (
-    <BrowserRouter>
-        <div className="App">
-            <Header/>
-            <Navbar/>
-            <Content state={store.state}/>
-            <Sidebar/>
-        </div>
-    </BrowserRouter>
-  );
+function App(props) {
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Header />
+                <Navbar />
+                <Content state={props.state} dispatch={props.dispatch} />
+                <Sidebar />
+            </div>
+        </BrowserRouter>
+    )
 }
 
-export default App;
+export default App

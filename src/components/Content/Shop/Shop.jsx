@@ -1,12 +1,20 @@
-import React from "react";
+import React from 'react'
 import styles from './Shop.module.css'
 import Book from './Book/Book'
 
-const Shop = (props) =>{
-    const books = props.state.books
+const Shop = (props) => {
+    const books = props.shop.books
     return (
         <div className={styles.shop}>
-            {books.map((book, index)=> <Book key={index} title={book.title} authors={book.authors} text={book.text} image={book.image}/>)}
+            {books.map((book, index) => (
+                <Book
+                    key={index}
+                    title={book.title}
+                    authors={book.authors}
+                    text={book.text}
+                    image={book.image}
+                />
+            ))}
         </div>
     )
 }
