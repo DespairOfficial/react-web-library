@@ -1,9 +1,5 @@
 import dialogSectionReducer from './dialogSectionReducer'
 import commentSectionReducer from './commentSectionReducer'
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
-const SEND_MESSAGE = 'SEND-MESSAGE'
-const ADD_COMMENT = 'ADD-COMMENT'
-const CHANGE_NEW_COMMENT_TEXT = 'CHANGE-NEW-COMMENT-TEXT'
 
 const Store = {
     _state: {
@@ -77,24 +73,9 @@ const Store = {
             this._state.commentSection,
             action
         )
+
         this._callSubscriber(this._state)
     },
-}
-
-export const addCommentActionCreator = () => {
-    return { type: ADD_COMMENT }
-}
-
-export const updateNewCommentTextActionCreator = (text) => {
-    return { type: CHANGE_NEW_COMMENT_TEXT, commentText: text }
-}
-
-export const updateNewMessageTextActionCreator = (text) => {
-    return { type: UPDATE_NEW_MESSAGE_TEXT, messageText: text }
-}
-
-export const sendMessageActionCreator = () => {
-    return { type: SEND_MESSAGE }
 }
 
 export default Store

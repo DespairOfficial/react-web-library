@@ -4,7 +4,7 @@ import Message from './Message/Message'
 import {
     updateNewMessageTextActionCreator,
     sendMessageActionCreator,
-} from '../../../../redux/state'
+} from '../../../../redux/dialogSectionReducer'
 
 const Messages = (props) => {
     const sendMessage = () => {

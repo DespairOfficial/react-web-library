@@ -19,4 +19,13 @@ const commentReducer = (state, action) => {
             return state
     }
 }
+
+export const addCommentActionCreator = () => {
+    return { type: ADD_COMMENT }
+}
+
+export const updateNewCommentTextActionCreator = (text) => {
+    return { type: CHANGE_NEW_COMMENT_TEXT, commentText: text }
+}
+
 export default commentReducer

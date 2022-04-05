@@ -4,7 +4,7 @@ import Comment from './Comment/Comment'
 import {
     addCommentActionCreator,
     updateNewCommentTextActionCreator,
-} from '../../../redux/state'
+} from '../../../redux/commentSectionReducer'
 
 const CommentSection = (props) => {
     const action = addCommentActionCreator()
