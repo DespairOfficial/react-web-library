@@ -5,7 +5,7 @@ import MyProfile from './MyProfile/MyProfile'
 import ReadingRoom from './ReadingRoom/ReadingRoom'
 import Shop from './Shop/Shop'
 import Donate from './Donate/Donate'
-import CommentSection from './CommentSection/CommentSection'
+import CommentSectionContainer from './CommentSection/CommentSectionContainer'
 import Dialogs from './Dialogs/Dialogs'
 
 const Content = (props) => {
@@ -14,26 +14,10 @@ const Content = (props) => {
             <Routes>
                 <Route path="myProfile" element={<MyProfile />} />
                 <Route path="readingRoom" element={<ReadingRoom />} />
-                <Route path="shop" element={<Shop shop={props.state.shop} />} />
+                <Route path="shop" element={<Shop />} />
                 <Route path="donate" element={<Donate />} />
-                <Route
-                    path="comments"
-                    element={
-                        <CommentSection
-                            state={props.state.commentSection}
-                            dispatch={props.dispatch}
-                        />
-                    }
-                />
-                <Route
-                    path="dialogs"
-                    element={
-                        <Dialogs
-                            dialogSection={props.state.dialogSection}
-                            dispatch={props.dispatch}
-                        />
-                    }
-                />
+                <Route path="comments" element={<CommentSectionContainer />} />
+                <Route path="dialogs" element={<Dialogs />} />
             </Routes>
         </div>
     )

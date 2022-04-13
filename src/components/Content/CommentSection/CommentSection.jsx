@@ -1,36 +1,25 @@
 import React from 'react'
 import styles from './CommentSection.module.css'
 import Comment from './Comment/Comment'
-import {
-    addCommentActionCreator,
-    updateNewCommentTextActionCreator,
-} from '../../../redux/commentSectionReducer'
 
 const CommentSection = (props) => {
-    const action = addCommentActionCreator()
-    const addComment = () => {
-        props.dispatch(action)
+    let onTextAreaChange = (e) => {
+        props.onCommentChange(e.target.value)
     }
-    const onTextAreaCheange = () => {
-        let text = newCommentArea.current.value
-        const action = updateNewCommentTextActionCreator(text)
-        props.dispatch(action)
+    let onAddComment = () => {
+        props.addComment()
     }
-
-    let newCommentArea = React.createRef()
-
     return (
         <div className={styles.commentSection}>
             <div className={styles.sendSection}>
                 <textarea
-                    ref={newCommentArea}
-                    value={props.state.newCommentText}
-                    onChange={onTextAreaCheange}
+                    value={props.newCommentText}
+                    onChange={onTextAreaChange}
                 />
-                <button onClick={addComment}>Send</button>
+                <button onClick={onAddComment}>Send</button>
             </div>
             <div>
-                {props.state.comments.map((comment, i) => {
+                {props.comments.map((comment, i) => {
                     return (
                         <Comment
                             key={i}

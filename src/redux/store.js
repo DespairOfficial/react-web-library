@@ -1,5 +1,5 @@
-import dialogSectionReducer from './dialogSectionReducer'
-import commentSectionReducer from './commentSectionReducer'
+import dialogReducer from './dialogReducer'
+import commentReducer from './commentReducer'
 
 const Store = {
     _state: {
@@ -65,15 +65,14 @@ const Store = {
         return this._state
     },
     dispatch(action) {
-        this._state.dialogSection = dialogSectionReducer(
+        this._state.dialogSection = dialogReducer(
             this._state.dialogSection,
             action
         )
-        this._state.commentSection = commentSectionReducer(
+        this._state.commentSection = commentReducer(
             this._state.commentSection,
             action
         )
-
         this._callSubscriber(this._state)
     },
 }

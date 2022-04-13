@@ -11,7 +11,7 @@ function App(props) {
             <div className="App">
                 <Header />
                 <Navbar />
-                <Content state={props.state} dispatch={props.dispatch} />
+                <Content />
                 <Sidebar />
             </div>
         </BrowserRouter>

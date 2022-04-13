@@ -1,19 +1,13 @@
 import React from 'react'
 import styles from './Messages.module.css'
 import Message from './Message/Message'
-import {
-    updateNewMessageTextActionCreator,
-    sendMessageActionCreator,
-} from '../../../../redux/dialogSectionReducer'
 
 const Messages = (props) => {
-    const sendMessage = () => {
-        const action = sendMessageActionCreator()
-        props.dispatch(action)
+    const onSendMessage = () => {
+        props.sendMessage()
     }
-    const updateMessage = (e) => {
-        const action = updateNewMessageTextActionCreator(e.target.value)
-        props.dispatch(action)
+    const onUpdateMessage = (e) => {
+        props.updateMessage(e.target.value)
     }
 
     let messages = props.messages
@@ -26,9 +20,9 @@ const Messages = (props) => {
             <div>
                 <textarea
                     value={props.newMessageText}
-                    onChange={updateMessage}
+                    onChange={onUpdateMessage}
                 />
-                <button onClick={sendMessage}>Send</button>
+                <button onClick={onSendMessage}>Send</button>
             </div>
         </div>
     )
