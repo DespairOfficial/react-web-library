@@ -1,6 +1,7 @@
-body{
+html, body{
     margin: 0;
-    background: #f5f7f8
+    background: #f5f7f8;
+    height: 100%;
 }
 
 .App{
@@ -12,6 +13,8 @@ body{
             "header header header"
             "navbar content sidebar";
 }
-
+#root{
+    height: 100%;
+}
 
 html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}

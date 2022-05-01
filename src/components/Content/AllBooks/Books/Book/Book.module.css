@@ -1,0 +1,16 @@
+.book {
+    width: 200px;
+    padding: 25px;
+}
+.book img {
+    width: 200px;
+    height: 250px;
+}
+.book:hover {
+    box-shadow: 0 0 8px 1px rgb(180, 180, 180);
+}
+.title {
+    font-weight: 900;
+}
+.authors {
+}

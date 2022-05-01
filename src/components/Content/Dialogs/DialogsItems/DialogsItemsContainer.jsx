@@ -6,12 +6,5 @@ let mapStateToProps = (state) => {
         dialogItems: state.dialogsPage.dialogItems,
     }
 }
-let mapDispatchToProps = (dispatch) => {
-    return {}
-}
-
-const DialogsItemsContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DialogItems)
+const DialogsItemsContainer = connect(mapStateToProps, {})(DialogItems)
 export default DialogsItemsContainer

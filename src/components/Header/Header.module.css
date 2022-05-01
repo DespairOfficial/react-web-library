@@ -3,4 +3,30 @@
     color: white;
     grid-area: header;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.authBlock{
+    display: flex;
+    flex-direction: row;
+}
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.logout{
+    margin: 10px;
+    cursor: pointer;
+}
+.logout :hover{
+    
+}
+.login a{
+    color: white;
+}
+.logo{
+    margin: 10px;
 }

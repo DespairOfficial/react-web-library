@@ -7,15 +7,15 @@ const Navbar = () => {
 
     return (
         <div className={styles.navbar}>
-            <NavLink to="/myProfile" className={isActive}>
-                MyProfile
+            <NavLink to="/profile" className={isActive}>
+                Profile
             </NavLink>
             <NavLink to="/readingRoom" className={isActive}>
                 Reading room
             </NavLink>
 
-            <NavLink to="/shop" className={isActive}>
-                Shop
+            <NavLink to="/books" className={isActive}>
+                Books
             </NavLink>
             <NavLink to="/donate" className={isActive}>
                 Support

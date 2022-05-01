@@ -1,0 +1,16 @@
+.selectedPage{
+    font-weight: bold;
+}
+.paginator{
+    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    background-color: #DDDFE0;
+}
+.paginator :hover{
+    cursor: pointer
+}
+.page{
+    margin: 5px;
+    font-size: 2rem;
+}

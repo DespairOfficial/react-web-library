@@ -13,7 +13,6 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = (dispatch) => {
-    // dispatch is bounded: store.dispatch.bind(store)
     return {
         addComment: () => {
             dispatch(addCommentActionCreator())
@@ -23,9 +22,4 @@ let mapDispatchToProps = (dispatch) => {
         },
     }
 }
-const CommentSectionContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CommentSection)
-
-export default CommentSectionContainer
+export default connect(mapStateToProps, mapDispatchToProps)(CommentSection)
