@@ -26,8 +26,7 @@ const Books = (props) => {
                         authors={book.authors}
                         text={book.text}
                         image={book.image}
-                        toggleAddToCard={props.toggleAddToCard}
-                        onToggleBookToCard={props.onToggleBookToCard}
+                        onToggleBookCard={props.onToggleBookCard}
                         isAddingInCard={props.isAddingInCard}
                         isInCard={book.isInCard}
                         id={book.id}

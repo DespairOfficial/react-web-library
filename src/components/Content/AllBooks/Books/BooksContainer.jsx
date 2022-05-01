@@ -1,41 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-    toggleAddToCard,
-    setBooks,
-    setCurrentPage,
-    setTotalBooksCount,
     toggleIsFetching,
-    toggleIsAddingInCard,
+    getUsers,
+    toggleBookCard,
 } from '../../../../redux/shopReducer'
 import Books from './Books'
 import Preloader from '../../../common/Preloader/Preloader'
-import {
-    getBooks,
-    addBookToCard,
-    removeBookFromCard,
-} from '../../../../http/booksAPI'
 class BooksAPI extends React.Component {
     componentDidMount() {
-        getBooks(this.props.currentPage, this.props.pageSize).then((data) => {
-            this.props.setTotalBooksCount(data.booksCount)
-            this.props.setBooks(data.books)
-            this.props.toggleIsFetching(false)
-        })
+        this.props.toggleIsFetching(true)
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChange = (pageNumber) => {
         this.props.toggleIsFetching(true)
-        this.props.setCurrentPage(pageNumber)
-        getBooks(pageNumber, this.props.pageSize).then((data) => {
-            this.props.setBooks(data.books)
-            this.props.toggleIsFetching(false)
-        })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
-    onToggleBookToCard = (bookId, isInCard) => {
-        toggleIsAddingInCard(bookId, true)
-        isInCard ? removeBookFromCard(bookId) : addBookToCard(bookId) // query to back
-        toggleIsAddingInCard(bookId, false)
+
+    onToggleBookCard = (bookId, isInCard) => {
+        this.props.toggleBookCard(bookId, isInCard)
     }
     isAddingInCard = (bookId) => {
         return this.props.isAddingBooks.some((id) => id === bookId)
@@ -50,8 +34,7 @@ class BooksAPI extends React.Component {
                     onPageChange={this.onPageChange}
                     currentPage={this.props.currentPage}
                     books={this.props.books}
-                    toggleAddToCard={this.props.toggleAddToCard}
-                    onToggleBookToCard={this.onToggleBookToCard}
+                    onToggleBookCard={this.onToggleBookCard}
                     isAddingInCard={this.isAddingInCard}
                 />
             </>
@@ -71,10 +54,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    toggleAddToCard,
-    setBooks,
-    setCurrentPage,
-    setTotalBooksCount,
     toggleIsFetching,
-    toggleIsAddingInCard,
+    getUsers,
+    toggleBookCard,
 })(BooksAPI)

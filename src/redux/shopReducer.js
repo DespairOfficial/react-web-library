@@ -1,3 +1,4 @@
+import { getBooks, removeBookFromCard, addBookToCard } from '../http/booksAPI'
 const TOGGLE_CARD = 'TOGGLE-IN-OUT-CARD'
 const SET_BOOKS = 'SET-BOOKS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
@@ -71,3 +72,23 @@ export const toggleIsAddingInCard = (bookId, isFetching) => ({
     isFetching,
 })
 export default shopReducer
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        getBooks(currentPage, pageSize).then((data) => {
+            dispatch(setTotalBooksCount(data.booksCount))
+            dispatch(setBooks(data.books))
+            dispatch(setCurrentPage(currentPage))
+        })
+        dispatch(toggleIsFetching(false))
+    }
+}
+
+export const toggleBookCard = (bookId, isInCard) => {
+    return (dispatch) => {
+        dispatch(toggleAddToCard(bookId))
+        dispatch(toggleIsAddingInCard(bookId, true))
+        isInCard ? removeBookFromCard(bookId) : addBookToCard(bookId) // query to back
+        dispatch(toggleIsAddingInCard(bookId, false))
+    }
+}

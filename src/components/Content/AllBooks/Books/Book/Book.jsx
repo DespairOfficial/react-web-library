@@ -13,8 +13,7 @@ const Book = (props) => {
             <button
                 disabled={props.isAddingInCard(props.id)}
                 onClick={() => {
-                    props.onToggleBookToCard(props.id, props.isInCard)
-                    props.toggleAddToCard(props.id)
+                    props.onToggleBookCard(props.id, props.isInCard)
                 }}
             >
                 {props.isInCard ? 'Remove' : 'Add'}
