@@ -1,0 +1,30 @@
+.book {
+    width: 200px;
+    padding: 25px;
+}
+.book img {
+    width: 200px;
+    height: 250px;
+}
+
+.title {
+    font-weight: 900;
+}
+.buyPage{
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.infocolumn{
+    background: rgb(220, 220, 220);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.infocolumn button{
+    height: 2rem;
+}
+.description{
+    margin: 20px;
+}

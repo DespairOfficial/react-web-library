@@ -9,7 +9,6 @@ const Books = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
     return (
         <div>
             <Paginator
@@ -21,15 +20,11 @@ const Books = (props) => {
             <div className={styles.books}>
                 {props.books.map((book, index) => (
                     <Book
+                        {...book}
                         key={index}
-                        title={book.title}
-                        authors={book.authors}
-                        text={book.text}
-                        image={book.image}
                         onToggleBookCard={props.onToggleBookCard}
                         isAddingInCard={props.isAddingInCard}
                         isInCard={book.isInCard}
-                        id={book.id}
                     />
                 ))}
             </div>

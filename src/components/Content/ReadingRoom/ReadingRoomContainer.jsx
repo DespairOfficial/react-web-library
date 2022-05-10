@@ -1,28 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { setReadingBook } from '../../../redux/readingRoomReducer'
+import { setCurrentBook } from '../../../redux/readingRoomReducer'
 import ReadingRoom from './ReadingRoom'
-import { getBook } from '../../../http/booksAPI'
-class ReadingRoomAPI extends React.Component {
-    componentDidMount() {
+
+const ReadingRoomAPI = (props) => {
+    useEffect(() => {
         const params = window.location.pathname
         let text = params
         let pattern = /(?<=\/readingRoom\/)[\w+.-]+/
         let bookId = text.match(pattern)
         if (bookId) {
-            getBook(bookId).then((data) => {
-                let book = data
-                this.props.setReadingBook(book)
-            })
+            props.setCurrentBook(bookId[0])
         }
-    }
-    render() {
-        return <ReadingRoom {...this.props} />
-    }
+    }, [])
+    return <ReadingRoom {...props} />
 }
 
 let mapStateToProps = (state) => ({
     book: state.readingRoomPage.book,
 })
 
-export default connect(mapStateToProps, { setReadingBook })(ReadingRoomAPI)
+export default connect(mapStateToProps, { setCurrentBook })(ReadingRoomAPI)

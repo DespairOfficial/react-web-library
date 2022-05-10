@@ -5,22 +5,32 @@ import Content from './components/Content/Content'
 import Sidebar from './components/Sidebar/SideBar'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginContainer from './components/Auth/Login/LoginContainer'
+import { connect } from 'react-redux'
+
+const Main = () => {
+    return (
+        <div className="App">
+            <Navbar />
+            <Content />
+            <Sidebar />
+        </div>
+    )
+}
 
 function App(props) {
     return (
         <BrowserRouter>
             <HeaderContainer />
+
             <Routes>
-                <Route path="/login" element={<LoginContainer />} />
-                <Route path="/registration" element={<LoginContainer />} />
                 <Route
                     path="/*"
                     element={
-                        <div className="App">
-                            <Navbar />
-                            <Content />
-                            <Sidebar />
-                        </div>
+                        localStorage.getItem('token') ? (
+                            <Main />
+                        ) : (
+                            <LoginContainer />
+                        )
                     }
                 />
             </Routes>
@@ -28,4 +38,7 @@ function App(props) {
     )
 }
 
-export default App
+let mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth,
+})
+export default connect(mapStateToProps, {})(App)

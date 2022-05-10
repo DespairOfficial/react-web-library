@@ -18,6 +18,12 @@ const Book = (props) => {
             >
                 {props.isInCard ? 'Remove' : 'Add'}
             </button>
+            <NavLink to={'/readingRoom/' + props.id}>
+                <button>Читать</button>
+            </NavLink>
+            <NavLink to={'/books/' + props.id}>
+                <button>Описание</button>
+            </NavLink>
         </div>
     )
 }

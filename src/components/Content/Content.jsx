@@ -7,7 +7,8 @@ import AllBooks from './AllBooks/AllBooks'
 import Donate from './Donate/Donate'
 import CommentSectionContainer from './CommentSection/CommentSectionContainer'
 import Dialogs from './Dialogs/Dialogs'
-
+import BuyBookContainer from './BuyBook/BuyBookContainer'
+import BookInfoContainer from './BookInfo/BookInfoContainer'
 const Content = (props) => {
     return (
         <div className={styles.content}>
@@ -18,9 +19,11 @@ const Content = (props) => {
                     element={<ReadingRoomContainer />}
                 />
                 <Route path="books" element={<AllBooks />} />
-                <Route pa th="donate" element={<Donate />} />
+                <Route path="books/*" element={<BookInfoContainer />} />
+                <Route path="donate" element={<Donate />} />
                 <Route path="comments" element={<CommentSectionContainer />} />
                 <Route path="dialogs" element={<Dialogs />} />
+                <Route path="buy/*" element={<BuyBookContainer />} />
             </Routes>
         </div>
     )

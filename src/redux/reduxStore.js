@@ -4,7 +4,10 @@ import dialogReducer from './dialogReducer'
 import shopReducer from './shopReducer'
 import readingRoomReducer from './readingRoomReducer'
 import authReducer from './authReducer'
+import sideBarReducer from './sidebarReducer'
 import thunkMiddleware from 'redux-thunk'
+import buyBookReducer from './buyBookReducer'
+import BookInfoReducer from './bookInfoReducer'
 
 let reducers = combineReducers({
     commentPage: commentReducer,
@@ -12,8 +15,10 @@ let reducers = combineReducers({
     shopPage: shopReducer,
     readingRoomPage: readingRoomReducer,
     auth: authReducer,
+    sidebar: sideBarReducer,
+    buyBook: buyBookReducer,
+    bookInfo: BookInfoReducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
-window.store = store
 export default store

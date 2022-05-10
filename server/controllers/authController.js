@@ -49,11 +49,16 @@ class authController {
                     message: `User with email: ${email} does't exists`,
                 })
             }
-            const isPasswordValid = bcrypt.compareSync(password, user.password)
+            const isPasswordValid = await bcrypt.compare(
+                password,
+                user.password
+            )
+
             if (!isPasswordValid) {
                 return res.status(400).json({ message: `Password is wrong` })
             }
             const token = generateAccessToken(user.id, user.role, user.email)
+
             return res.json({ token })
         } catch (e) {}
     }
