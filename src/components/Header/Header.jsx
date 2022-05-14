@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 const Header = () => {
     const navigate = useNavigate()
     const onLogOut = () => {
-        localStorage.removeItem('token')
+        sessionStorage.removeItem('token')
         navigate('/login')
     }
     return (

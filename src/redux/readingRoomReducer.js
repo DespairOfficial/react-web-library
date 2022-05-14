@@ -1,4 +1,4 @@
-import { getBook, getPdf } from '../http/booksAPI'
+import { getBookData, getPdf } from '../http/booksAPI'
 const SET_READING_BOOK = 'SET-READING-BOOK'
 
 let initialState = {
@@ -23,8 +23,8 @@ const setReadingBook = (book, pdf) => {
 }
 export const setCurrentBook = (bookId) => {
     return (dispatch) => {
-        const bookJSON = getBook(bookId)
-        const bookPDF = getPdf(bookId, true)
+        const bookJSON = getBookData(bookId)
+        const bookPDF = getPdf(bookId)
         Promise.all([bookJSON, bookPDF]).then((values) => {
             dispatch(setReadingBook(...values))
         })

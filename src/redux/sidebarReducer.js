@@ -1,4 +1,4 @@
-import { getBook } from '../http/booksAPI'
+import { getBookData } from '../http/booksAPI'
 const SET_SIDEBAR_BOOK = 'SET-SIDEBAR-BOOK'
 
 let initialState = {
@@ -22,7 +22,7 @@ const setReadingBook = (book) => {
 }
 export const setCurrentBook = (bookId) => {
     return (dispatch) => {
-        const bookJSON = getBook(bookId)
+        const bookJSON = getBookData(bookId)
         Promise.all([bookJSON]).then((values) => {
             dispatch(setReadingBook(...values))
         })

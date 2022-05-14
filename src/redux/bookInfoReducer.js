@@ -1,5 +1,6 @@
-import { getBook, getBookRating, rateBook } from '../http/booksAPI'
+import { getBookData, getBookRating, rateBook } from '../http/booksAPI'
 const SET_BOOK_INFO = 'SET-BOOK-INFO'
+
 const initialState = {
     book: null,
 }
@@ -30,7 +31,7 @@ const setBookInfo = (book, rating) => {
 export const setCurrentBookInfo = (bookId) => {
     return (dispatch) => {
         const rateBookInfo = getBookRating(bookId)
-        const mainBookInfo = getBook(bookId)
+        const mainBookInfo = getBookData(bookId)
         Promise.all([mainBookInfo, rateBookInfo]).then((values) => {
             dispatch(setBookInfo(...values))
         })

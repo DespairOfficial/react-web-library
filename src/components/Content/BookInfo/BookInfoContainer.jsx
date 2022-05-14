@@ -6,6 +6,7 @@ import {
 import BookInfo from './BookInfo'
 import { connect } from 'react-redux'
 import { getBougthBooks } from '../../../http/booksAPI'
+
 const BookInfoContainer = (props) => {
     const [isBookBought, setIsBookBougth] = useState()
     const isBought = (bookId) => {
@@ -21,10 +22,9 @@ const BookInfoContainer = (props) => {
         let pattern = /(?<=\/books\/)[\w+.-]+/
         let bookId = text.match(pattern)
         if (bookId) {
-            props.setCurrentBookInfo(bookId[0])
-
             isBought(bookId[0]).then((isBougth) => {
                 setIsBookBougth(isBougth)
+                props.setCurrentBookInfo(bookId[0])
             })
         }
     }, [])

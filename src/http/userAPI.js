@@ -6,7 +6,7 @@ export const registration = async (email, password, username) => {
         password,
         username,
     })
-    localStorage.setItem('token', data.token)
+    sessionStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }
 export const login = async (email, password, username) => {
@@ -15,7 +15,7 @@ export const login = async (email, password, username) => {
         password,
         username,
     })
-    localStorage.setItem('token', data.token)
+    sessionStorage.setItem('token', data.token)
     const decodedData = jwt_decode(data.token)
     return decodedData
 }

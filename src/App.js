@@ -26,7 +26,7 @@ function App(props) {
                 <Route
                     path="/*"
                     element={
-                        localStorage.getItem('token') ? (
+                        sessionStorage.getItem('token') ? (
                             <Main />
                         ) : (
                             <LoginContainer />

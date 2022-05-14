@@ -1,4 +1,4 @@
-import { getBook } from '../http/booksAPI'
+import { getBookData } from '../http/booksAPI'
 const SET_BOOK_TO_BUY = 'SET-BOOK-TO-BUY'
 
 const initialState = {
@@ -25,7 +25,7 @@ const setBookToBuy = (book) => {
 
 export const setCurrentBookToBuy = (bookId) => {
     return (dispatch) => {
-        getBook(bookId).then((data) => {
+        getBookData(bookId).then((data) => {
             dispatch(setBookToBuy(data))
         })
     }

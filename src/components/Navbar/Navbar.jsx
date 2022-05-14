@@ -20,9 +20,6 @@ const Navbar = () => {
             <NavLink to="/donate" className={isActive}>
                 Support
             </NavLink>
-            <NavLink to="/comments" className={isActive}>
-                Comments
-            </NavLink>
             <NavLink to="/dialogs" className={isActive}>
                 Dialogs
             </NavLink>

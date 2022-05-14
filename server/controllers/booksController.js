@@ -33,19 +33,39 @@ class booksController {
     }
     async getBookById(req, res) {
         const bookId = req.params.bookId
+        const { id: user_id } = req.user
+        const bookBought = (
+            await db.query(
+                `SELECT * FROM users_books_bought where book_id='${bookId}' and user_id='${user_id}' `
+            )
+        ).rows[0]
         const book = (
             await db.query(`SELECT * FROM books where id='${bookId}'`)
         ).rows[0]
-        res.send(book)
+        let isBookBought = false
+        if (bookBought) {
+            isBookBought = true
+        }
+        res.send({ ...book, isBookBought })
     }
     async getPdfById(req, res) {
         const bookId = req.params.bookId
-        const isShort = req.query.isShort
-        const queryPdfName = (
-            await db.query(`SELECT pdf_name FROM books where id='${bookId}'`)
-        ).rows[0].pdf_name
+        let isShort = true
+        const { id: user_id } = req.user
 
-        const actualPdfName = (bookPdfName, isShort) => {
+        const bookAllData = (
+            await db.query(`SELECT * FROM books where id='${bookId}'`)
+        ).rows[0]
+        const PdfName = bookAllData.pdf_name
+        const isBookBought = (
+            await db.query(
+                `SELECT * FROM users_books_bought where book_id='${bookId}' and user_id='${user_id}' `
+            )
+        ).rows[0]
+        if (isBookBought || bookAllData.is_free) {
+            isShort = false
+        }
+        const getActualPdfName = (bookPdfName, isShort) => {
             if (isShort) {
                 return bookPdfName + 'Short.pdf'
             }
@@ -60,17 +80,16 @@ class booksController {
                 'x-sent': true,
             },
         }
-        res.sendFile(actualPdfName(queryPdfName, isShort), options, (err) => {
+        res.sendFile(getActualPdfName(PdfName, isShort), options, (err) => {
             if (err) {
                 res.status(err.status).end()
-            } else {
             }
         })
     }
 
     async addBookToCard(req, res) {
         const bookId = req.body.bookId
-        const { id: user_id, role, email } = req.user
+        const { id: user_id } = req.user
         await db.query(
             `INSERT INTO users_books_added (user_id, book_id) VALUES ('${user_id}', '${bookId}')`
         )
@@ -79,7 +98,7 @@ class booksController {
     }
     async removeBookFromCard(req, res) {
         const bookId = req.params.bookId
-        const { id: user_id, role, email } = req.user
+        const { id: user_id } = req.user
         await db.query(
             `DELETE FROM users_books_added WHERE user_id = '${user_id}' AND book_id = '${bookId}'`
         )
@@ -160,6 +179,52 @@ class booksController {
             )
         ).rows
         res.send({ booksBougth: books })
+    }
+    async getCommentsByBook(req, res) {
+        const bookId = req.params.bookId
+        const comments = (
+            await db.query(
+                `SELECT  users_books_comments.id, users_books_comments.text, users_books_comments.date, 
+                users.name, users.role
+                from users_books_comments JOIN users ON user_id = users.id WHERE  book_id= '${bookId}'`
+            )
+        ).rows
+        res.send({ comments: comments })
+    }
+    async leaveAComment(req, res) {
+        const commentText = req.body.commentText
+        const bookId = req.params.bookId
+        const { id: user_id } = req.user
+
+        const commentId = (
+            await db.query(
+                `INSERT INTO users_books_comments (user_id, book_id, text) VALUES ('${user_id}', '${bookId}','${commentText}') returning users_books_comments.id`
+            )
+        ).rows[0].id
+        const newComment = (
+            await db.query(
+                `SELECT  users_books_comments.id, users_books_comments.text, users_books_comments.date,
+                users.name, users.role
+                from users_books_comments JOIN users ON user_id = users.id WHERE  users_books_comments.id= '${commentId}'`
+            )
+        ).rows[0]
+        res.send({ message: 'Success', newComment: newComment })
+    }
+    async removeCommentById(req, res) {
+        const commentId = req.params.commentId
+        const { id: userId } = req.user
+        const queryForUserId = await db.query(
+            `SELECT user_id FROM users_books_comments WHERE id = ${commentId}`
+        )
+        const user_id = queryForUserId.rows[0].user_id
+        if (user_id === userId) {
+            await db.query(
+                `DELETE FROM users_books_comments WHERE id = ${commentId}`
+            )
+            res.send({ status: 0, message: 'Removed' })
+        } else {
+            res.send({ status: 1, message: 'You have no rights for this' })
+        }
     }
 }
 module.exports = new booksController()

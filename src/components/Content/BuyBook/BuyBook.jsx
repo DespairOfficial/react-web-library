@@ -4,8 +4,9 @@ import Preloader from '../../common/Preloader/Preloader'
 import { useNavigate } from 'react-router-dom'
 const BuyBook = (props) => {
     const onBuyBook = () => {
-        props.buyBook(props.book.id)
-        navigate(`/books/${props.book.id}`)
+        props.buyBook(props.book.id).then(() => {
+            navigate(`/books/${props.book.id}`)
+        })
     }
     const navigate = useNavigate()
     if (props.book) {

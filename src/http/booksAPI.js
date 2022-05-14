@@ -5,12 +5,12 @@ export const getBooks = (currentPage, pageSize) => {
         .then((response) => response.data)
 }
 
-export const getBook = (bookId) => {
+export const getBookData = (bookId) => {
     return $authHost.get(`/books/${bookId}`).then((response) => response.data)
 }
-export const getPdf = (bookId, isShort) => {
+export const getPdf = (bookId) => {
     return $authHost
-        .get(`/books/pdf/${bookId}?isShort=${isShort}`, {
+        .get(`/books/pdf/${bookId}`, {
             responseType: 'arraybuffer',
         })
         .then((response) => {
@@ -53,6 +53,23 @@ export const buyBook = (bookId) => {
 }
 export const getBougthBooks = () => {
     return $authHost.get(`/books/bought`).then((response) => {
+        return response.data
+    })
+}
+export const leaveAComment = (bookId, commentText) => {
+    return $authHost
+        .post(`/books/comments/${bookId}`, { commentText: commentText })
+        .then((response) => {
+            return response.data
+        })
+}
+export const getCommentsByBook = (bookId) => {
+    return $authHost.get(`/books/comments/${bookId}`).then((response) => {
+        return response.data
+    })
+}
+export const removeBookCommentById = (commentId) => {
+    return $authHost.delete(`/books/comments/${commentId}`).then((response) => {
         return response.data
     })
 }

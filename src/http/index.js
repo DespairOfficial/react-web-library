@@ -1,5 +1,5 @@
 import axios from 'axios'
-const token = localStorage.token
+const token = sessionStorage.token
 const API_URL = 'http://localhost:3001'
 
 const $host = axios.create({ baseURL: API_URL })
