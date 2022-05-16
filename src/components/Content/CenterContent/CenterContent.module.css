@@ -1,0 +1,12 @@
+.centerContent{
+    transform: translate(0%);
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    margin: 0 10px 10px 10px;
+    min-height: calc(100% - 90px);
+
+}
+.showNavBar{
+    transform: translate(20vw);
+}

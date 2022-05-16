@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styles from './Login.module.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
-import { login, registration } from '../../../http/userAPI'
 
 const Login = (props) => {
     const location = useLocation()
@@ -74,20 +73,18 @@ const Login = (props) => {
         }
     }, [emailError, passwordError, usernameError])
 
-    const auth = async (e) => {
+    const auth = (e) => {
         try {
             e.preventDefault()
-            if (isLogin) {
-                await login(email, password, username)
-            } else {
-                await registration(email, password, username)
-            }
-            props.setUserData({
-                email: email,
-                username: username,
-                isFetching: false,
-            })
-            navigate('/')
+            props.setCurrentUserData(
+                {
+                    email: email,
+                    username: username,
+                    password: password,
+                },
+                isLogin
+            )
+            navigate('/books')
         } catch (e) {
             alert(e.response.data.message)
         }

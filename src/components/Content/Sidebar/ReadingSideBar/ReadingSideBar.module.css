@@ -1,0 +1,16 @@
+.book{
+    width: 100%;
+    padding: 10px;
+}
+.book img{
+    width: 100%;
+    
+}
+.title{
+    text-align: center;
+    
+}
+.authors{
+    text-align: center;
+    font-weight: 600;
+}

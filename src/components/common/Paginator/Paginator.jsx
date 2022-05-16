@@ -6,7 +6,7 @@ const Paginator = (props) => {
         <div className={styles.paginator}>
             {props.pages.map((pageNumber, i) => {
                 return (
-                    <span
+                    <div
                         onClick={() => props.onPageChange(pageNumber)}
                         key={i}
                         className={
@@ -18,7 +18,7 @@ const Paginator = (props) => {
                         }
                     >
                         {pageNumber}
-                    </span>
+                    </div>
                 )
             })}
         </div>

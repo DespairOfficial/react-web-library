@@ -3,8 +3,8 @@
     align-items: center;
     justify-content: center;
     background: #F5F7F8;
-    overflow: auto;  
-    height: 93%;
+    height: 100%;
+
 }
 .auth{
     display: flex;

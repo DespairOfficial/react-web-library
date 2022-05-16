@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setUserData } from '../../../redux/authReducer'
+import { setCurrentUserData } from '../../../redux/authReducer'
 import Login from './Login'
 
 const mapStateToProps = (state) => {
@@ -7,7 +7,6 @@ const mapStateToProps = (state) => {
         email: state.auth.email,
         username: state.auth.username,
         password: state.auth.password,
-        isFetching: state.auth.password,
     }
 }
-export default connect(mapStateToProps, { setUserData })(Login)
+export default connect(mapStateToProps, { setCurrentUserData })(Login)

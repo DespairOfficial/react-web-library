@@ -1,0 +1,17 @@
+.sidebar {
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 20vw;
+    display: flex;
+    background: white;
+    justify-content: center;
+    transform: translate(0%);
+    transition: 0.3s;
+    min-height: calc(100% - 90px);
+    overflow: hidden;
+    margin-bottom: 10px;
+
+}
+.showNavBar{
+    transform: translate(20vw);
+}

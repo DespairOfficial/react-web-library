@@ -1,21 +1,33 @@
-const { secret } = require('../config')
 const path = require('path')
 const db = require('../db')
 
 class booksController {
     async getBooks(req, res) {
-        const count = (await db.query('SELECT COUNT(*) FROM books ')).rows[0]
-            .count
-        const limit = req.query.limit
-        const page = req.query.page
-        const query = await db.query(
-            `SELECT * FROM books LIMIT '${limit}' OFFSET '${
+        const limit = req.query.limit || 2
+        const page = req.query.page || 1
+        const like = req.query.like.toLowerCase()
+        let query = ''
+        let countQuery = ''
+        if (like) {
+            query = `SELECT * FROM books WHERE lower(title) like '%${like}%' or  lower(text) like '%${like}%' LIMIT '${limit}' OFFSET '${
                 (page - 1) * limit
-            }' `
-        )
-        let books = query.rows
+            }'`
+            countQuery = `SELECT COUNT(*) FROM books WHERE lower(title) like '%${like}%' or  lower(text) like '%${like}%' LIMIT '${limit}' OFFSET '${
+                (page - 1) * limit
+            }'`
+        } else {
+            query = `SELECT * FROM books LIMIT '${limit}' OFFSET '${
+                (page - 1) * limit
+            }'`
+            countQuery = 'SELECT COUNT(*) FROM books'
+        }
+        const queryBooks = await db.query(query)
+        let books = queryBooks.rows
 
-        const { id: user_id, role, email } = req.user
+        const countRes = await db.query(countQuery)
+        const count = countRes.rows[0].count
+
+        const { id: user_id } = req.user
         let booksIds = (
             await db.query(
                 `SELECT book_id FROM users_books_added WHERE user_id='${user_id}'`
@@ -108,7 +120,7 @@ class booksController {
     async rateBook(req, res) {
         const bookId = req.body.bookId
         const rating = req.body.rating
-        const { id: user_id, role, email } = req.user
+        const { id: user_id } = req.user
         const isRated = (
             await db.query(
                 `SELECT * FROM users_books_rated WHERE book_id = '${bookId}' and user_id = '${user_id}'`

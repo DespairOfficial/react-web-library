@@ -1,24 +1,29 @@
 import React from 'react'
 import styles from './Header.module.css'
-import { NavLink, useNavigate } from 'react-router-dom'
+import logo from '../../assets/images/logo.png'
 
-const Header = () => {
-    const navigate = useNavigate()
+const Header = (props) => {
     const onLogOut = () => {
-        sessionStorage.removeItem('token')
-        navigate('/login')
+        props.logOut()
     }
-    return (
-        <div className={styles.header}>
-            <div className={styles.logo}>Header</div>
-            <div className={styles.authBlock}>
-                <div className={styles.login}>
-                    <NavLink to="/login">Login</NavLink>
-                </div>
+    const showLogButton = () => {
+        if (props.isAuth) {
+            return (
                 <div className={styles.logout}>
                     <p onClick={onLogOut}>Log out</p>
                 </div>
+            )
+        }
+    }
+    return (
+        <div className={styles.header}>
+            <div className={styles.logoWrapper}>
+                <img src={logo} alt="Books" />
+                <div className={styles.logoTitle}>
+                    <b>Library</b>
+                </div>
             </div>
+            <div className={styles.authBlock}>{showLogButton()}</div>
         </div>
     )
 }

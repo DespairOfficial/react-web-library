@@ -1,7 +1,7 @@
 import { $authHost } from './index'
-export const getBooks = (currentPage, pageSize) => {
+export const getBooks = (currentPage, pageSize, filter) => {
     return $authHost // returning data, after waiting promise
-        .get(`/books?page=${currentPage}&limit=${pageSize}`)
+        .get(`/books?page=${currentPage}&limit=${pageSize}&like=${filter}`)
         .then((response) => response.data)
 }
 

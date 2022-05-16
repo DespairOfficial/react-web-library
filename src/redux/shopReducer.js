@@ -5,13 +5,13 @@ const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_BOOKS_COUNT = 'SET-TOTAL-BOOKS-COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 const TOGGLE_IS_ADDING_IN_CARD = 'TOGGLE-IS-ADDING-IN-CARD'
-
+const SET_SEARCH_FILTER = 'SET-SEARCH-FILTER'
 let initialState = {
     books: [],
     totalBookCount: 0,
     pageSize: 2,
     currentPage: 1,
-    isFetching: true,
+    filter: '',
     isAddingBooks: [],
 }
 
@@ -40,6 +40,7 @@ const shopReducer = (state = initialState, action) => {
         case TOGGLE_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching }
         }
+
         case TOGGLE_IS_ADDING_IN_CARD: {
             return {
                 ...state,
@@ -48,47 +49,48 @@ const shopReducer = (state = initialState, action) => {
                     : state.isAddingBooks.filter((id) => id !== action.bookId),
             }
         }
+        case SET_SEARCH_FILTER: {
+            const newState = JSON.parse(JSON.stringify(state))
+            newState.filter = action.filter
+            return newState
+        }
         default:
-            return state
+            return { ...state }
     }
 }
 
-export const toggleAddToCard = (bookId) => ({ type: TOGGLE_CARD, bookId }) // returning whole object
-export const setBooks = (books) => ({ type: SET_BOOKS, books })
-export const setCurrentPage = (newCurrentPage) => ({
+const toggleAddToCard = (bookId) => ({ type: TOGGLE_CARD, bookId }) // returning whole object
+const setBooks = (books) => ({ type: SET_BOOKS, books })
+const setCurrentPage = (newCurrentPage) => ({
     type: SET_CURRENT_PAGE,
     newCurrentPage,
 })
-export const setTotalBooksCount = (totalBooksCount) => ({
+const setTotalBooksCount = (totalBooksCount) => ({
     type: SET_TOTAL_BOOKS_COUNT,
     totalBooksCount,
 })
-export const toggleIsFetching = (isFetching) => {
-    return { type: TOGGLE_IS_FETCHING, isFetching }
+const setFilter = (filter) => {
+    return { type: SET_SEARCH_FILTER, filter }
 }
-export const toggleIsAddingInCard = (bookId, isFetching) => ({
-    type: TOGGLE_IS_ADDING_IN_CARD,
-    bookId,
-    isFetching,
-})
-export default shopReducer
-
-export const getUsers = (currentPage, pageSize) => {
+export const getCurrentBooks = (currentPage, pageSize, filter) => {
     return (dispatch) => {
-        getBooks(currentPage, pageSize).then((data) => {
+        getBooks(currentPage, pageSize, filter).then((data) => {
             dispatch(setTotalBooksCount(data.booksCount))
             dispatch(setBooks(data.books))
             dispatch(setCurrentPage(currentPage))
         })
-        dispatch(toggleIsFetching(false))
     }
 }
 
 export const toggleBookCard = (bookId, isInCard) => {
     return (dispatch) => {
         dispatch(toggleAddToCard(bookId))
-        dispatch(toggleIsAddingInCard(bookId, true))
         isInCard ? removeBookFromCard(bookId) : addBookToCard(bookId) // query to back
-        dispatch(toggleIsAddingInCard(bookId, false))
     }
 }
+export const setSearchFilter = (filter) => {
+    return (dispatch) => {
+        dispatch(setFilter(filter))
+    }
+}
+export default shopReducer

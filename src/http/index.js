@@ -1,11 +1,12 @@
 import axios from 'axios'
-const token = sessionStorage.token
+
 const API_URL = 'http://localhost:3001'
 
 const $host = axios.create({ baseURL: API_URL })
 const $authHost = axios.create({ baseURL: API_URL }) //instance
 
 const authIntercetpor = (config) => {
+    const token = localStorage.getItem('token')
     config.headers.authorization = `Bearer ${token}`
     return config
 }
