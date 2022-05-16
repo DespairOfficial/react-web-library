@@ -17,9 +17,6 @@ const BooksAPI = (props) => {
     const onToggleBookCard = (bookId, isInCard) => {
         props.toggleBookCard(bookId, isInCard)
     }
-    const isAddingInCard = (bookId) => {
-        return props.isAddingBooks.some((id) => id === bookId)
-    }
 
     return (
         <>
@@ -31,7 +28,6 @@ const BooksAPI = (props) => {
                     currentPage={props.currentPage}
                     books={props.books}
                     onToggleBookCard={onToggleBookCard}
-                    isAddingInCard={isAddingInCard}
                 />
             ) : (
                 <NotFound />

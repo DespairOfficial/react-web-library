@@ -5,16 +5,18 @@ class booksController {
     async getBooks(req, res) {
         const limit = req.query.limit || 2
         const page = req.query.page || 1
-        const like = req.query.like.toLowerCase()
+        const filter = req.query.filter.toLowerCase()
         let query = ''
         let countQuery = ''
-        if (like) {
-            query = `SELECT * FROM books WHERE lower(title) like '%${like}%' or  lower(text) like '%${like}%' LIMIT '${limit}' OFFSET '${
-                (page - 1) * limit
-            }'`
-            countQuery = `SELECT COUNT(*) FROM books WHERE lower(title) like '%${like}%' or  lower(text) like '%${like}%' LIMIT '${limit}' OFFSET '${
-                (page - 1) * limit
-            }'`
+        if (filter) {
+            query = `((SELECT * FROM books WHERE lower(title) like '%${filter}%' or  lower(text) like '%${filter}%')
+            UNION 
+            (SELECT * FROM books where   EXISTS ( SELECT * from unnest(authors) as X where x ~* '${filter}' ))) 
+             LIMIT '${limit}' OFFSET '${(page - 1) * limit}' `
+
+            countQuery = `(SELECT count(*) FROM books WHERE lower(title) like '%${filter}%' or  lower(text) like '%${filter}%')
+            UNION 
+            (SELECT count(*) FROM books where   EXISTS ( SELECT * from unnest(authors) as X where x ~* '${filter}' ))`
         } else {
             query = `SELECT * FROM books LIMIT '${limit}' OFFSET '${
                 (page - 1) * limit
@@ -26,6 +28,8 @@ class booksController {
 
         const countRes = await db.query(countQuery)
         const count = countRes.rows[0].count
+
+        console.log(count)
 
         const { id: user_id } = req.user
         let booksIds = (

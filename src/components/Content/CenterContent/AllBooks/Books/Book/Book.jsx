@@ -19,14 +19,10 @@ const Book = (props) => {
                     </div>
                 </div>
                 <div className={styles.buttons}>
-                    <div
-                        className={styles.toggleCard}
-                        onClick={onToggleCard}
-                        disabled={props.isAddingInCard(props.id)}
-                    >
-                        {props.isInCard ? 'Remove' : 'Add'}
-                    </div>
-                    <LikeButton />
+                    <LikeButton
+                        isInCard={props.isInCard}
+                        onToggleCard={onToggleCard}
+                    />
                     <div className={styles.description}>
                         <NavLink to={'/books/' + props.id}>
                             <button>Описание</button>

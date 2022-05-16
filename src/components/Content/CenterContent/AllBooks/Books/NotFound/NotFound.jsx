@@ -5,7 +5,7 @@ const NotFound = () => {
     return (
         <div className={styles.notFound}>
             <img src={sadSmile} alt="" />
-            Nothing was found found
+            Nothing was found
         </div>
     )
 }

@@ -4,7 +4,6 @@ const SET_BOOKS = 'SET-BOOKS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_BOOKS_COUNT = 'SET-TOTAL-BOOKS-COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
-const TOGGLE_IS_ADDING_IN_CARD = 'TOGGLE-IS-ADDING-IN-CARD'
 const SET_SEARCH_FILTER = 'SET-SEARCH-FILTER'
 let initialState = {
     books: [],
@@ -39,15 +38,6 @@ const shopReducer = (state = initialState, action) => {
         }
         case TOGGLE_IS_FETCHING: {
             return { ...state, isFetching: action.isFetching }
-        }
-
-        case TOGGLE_IS_ADDING_IN_CARD: {
-            return {
-                ...state,
-                isAddingBooks: action.isFetching
-                    ? [...state.isAddingBooks, action.bookId]
-                    : state.isAddingBooks.filter((id) => id !== action.bookId),
-            }
         }
         case SET_SEARCH_FILTER: {
             const newState = JSON.parse(JSON.stringify(state))
