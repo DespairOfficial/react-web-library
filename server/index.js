@@ -1,10 +1,11 @@
+const express = require('express')
+const cors = require('cors')
+
 const authRouter = require('./routers/authRouter')
 const booksRouter = require('./routers/booksRouter')
 const CORSMiddleware = require('./middlewares/CORSMiddleware')
 const authMiddleware = require('./middlewares/authMiddleware')
-const cors = require('cors')
-
-const express = require('express')
+const donationRouter = require('./routers/donationRouter')
 
 const app = express()
 
@@ -15,7 +16,7 @@ app.use(cors({ credentials: true, origin: PORT }))
 
 app.use('/books', [CORSMiddleware, authMiddleware], booksRouter)
 app.use('/auth', CORSMiddleware, authRouter)
-
+app.use('/donate', [CORSMiddleware, authMiddleware], donationRouter)
 app.listen(PORT, () => {
     console.log(`Server has been started on port ${PORT}...`)
 })

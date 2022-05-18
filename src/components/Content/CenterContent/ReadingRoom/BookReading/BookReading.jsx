@@ -4,7 +4,6 @@ import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 import JumpToPage from './JumpToPage/JumpToPage'
 
 const BookReading = (props) => {
-    console.log('updated')
     const [numPages, setNumPages] = useState(null)
     const [pageNumber, setPageNumber] = useState(1)
     let isLastPage = false

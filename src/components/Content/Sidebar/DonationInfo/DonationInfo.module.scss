@@ -1,0 +1,84 @@
+
+.donationInfo{
+    width: 100%;
+}
+
+.box {
+    position: relative;
+    background: #f29d16;
+    border: 0.25rem solid black;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    outline: 0;
+    overflow: hidden;
+
+    .percent{
+        font-size: 2rem;
+        color: white;
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+    }
+    .frontEllipse, .backEllipse{
+        content: 'attr(heighOfWater px)';
+        width: 375%;
+        height: 150%;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -75%);
+        transition: top 1s;
+        background: #000;
+    } 
+
+    .backEllipse{
+        border-radius: 65%;
+        background: rgba(20, 20, 20, 1);
+        animation: animate 8s linear infinite;
+    }
+    .frontEllipse {
+  
+        border-radius: 45%;
+        background: rgba(20, 20, 20, .5);
+        animation: animate 8s linear infinite;
+    }
+
+
+    // &::after,
+    // &::before {
+    //     content: 'attr(heighOfWater px)';
+    //     width: 575%;
+    //     height: 250%;
+    //     position: absolute;
+    //     top: 32%;
+    //     left: 50%;
+    //     transform: translate(-50%, -75%);
+    //     background: #000;
+    // }
+
+    // &::before {
+    
+    //     border-radius: 69%;
+    //     background: rgba(20, 20, 20, 1);
+    //     animation: animate 8s linear infinite;
+    // }
+    // &::after {
+  
+    //     border-radius: 46%;
+    //     background: rgba(20, 20, 20, .5);
+    //     animation: animate 8s linear infinite;
+    // }
+}
+
+@keyframes animate {
+    0% {
+      transform: translate(-50%, -75%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -75%) rotate(360deg);
+    }
+  }

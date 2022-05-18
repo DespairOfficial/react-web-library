@@ -29,8 +29,6 @@ class booksController {
         const countRes = await db.query(countQuery)
         const count = countRes.rows[0].count
 
-        console.log(count)
-
         const { id: user_id } = req.user
         let booksIds = (
             await db.query(

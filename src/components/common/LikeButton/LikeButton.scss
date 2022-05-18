@@ -6,7 +6,7 @@
 
 
     svg{
-        cursor:pointer; overflow:visible; width:60px;
+        cursor:pointer; overflow:visible; width:80px;
         .heart{transform-origin:center; animation:animateHeartOut .3s linear forwards;}
         .main-circ{transform-origin:29.5px 29.5px;}
     }

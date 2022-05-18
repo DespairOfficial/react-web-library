@@ -3,7 +3,7 @@ import styles from './Sidebar.module.css'
 import { Routes, Route } from 'react-router-dom'
 import ReadingSideBar from './ReadingSideBar/ReadingSideBar'
 import BooksFilter from './BooksFilter/BooksFIlter'
-
+import DonationInfo from './DonationInfo/DonationInfo'
 const Sidebar = (props) => {
     return (
         <div
@@ -16,6 +16,7 @@ const Sidebar = (props) => {
             <Routes>
                 <Route path="readingRoom/*" element={<ReadingSideBar />} />
                 <Route path="books" element={<BooksFilter />} />
+                <Route path="donate" element={<DonationInfo />} />
             </Routes>
         </div>
     )

@@ -8,6 +8,7 @@ import sideBarReducer from './sidebarReducer'
 import thunkMiddleware from 'redux-thunk'
 import buyBookReducer from './buyBookReducer'
 import BookInfoReducer from './bookInfoReducer'
+import donationReducer from './donationReducer'
 
 let reducers = combineReducers({
     commentPage: commentReducer,
@@ -18,6 +19,7 @@ let reducers = combineReducers({
     sidebar: sideBarReducer,
     buyBook: buyBookReducer,
     bookInfo: BookInfoReducer,
+    donation: donationReducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))
