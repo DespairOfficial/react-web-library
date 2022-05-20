@@ -37,10 +37,10 @@ const Navbar = (props) => {
                         Books
                     </NavLink>
                     <NavLink to="/donate" className={isActive}>
-                        Support
+                        Donate
                     </NavLink>
-                    <NavLink to="/dialogs" className={isActive}>
-                        Dialogs
+                    <NavLink to="/support" className={isActive}>
+                        Support
                     </NavLink>
                 </div>
             </div>

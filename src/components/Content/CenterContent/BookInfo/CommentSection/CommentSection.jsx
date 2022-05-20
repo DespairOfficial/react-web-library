@@ -16,7 +16,7 @@ const CommentSection = (props) => {
     return (
         <div className={styles.commentSection}>
             <div className={styles.sendSection}>
-                <textarea
+                <input
                     value={props.newCommentText}
                     onChange={onTextAreaChange}
                 />

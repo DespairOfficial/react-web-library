@@ -1,0 +1,12 @@
+.adminContent {
+    background: white;
+
+
+    flex-direction: row;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 90px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100% - 90px);
+}

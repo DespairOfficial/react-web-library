@@ -7,6 +7,10 @@ router.get('/', controller.getBooks)
 router.post('/toCard', controller.addBookToCard)
 router.post('/rate', controller.rateBook)
 router.post('/comments/:bookId', controller.leaveAComment)
+router.put(
+    '/:bookId/setLastReadedPage/:lastPageReaded',
+    controller.setLastReadedPage
+)
 
 router.delete('/toCard/:bookId', controller.removeBookFromCard)
 router.delete('/comments/:commentId', controller.removeCommentById)

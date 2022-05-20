@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './RatingWidget.module.scss'
 const RatingWidget = (props) => {
+    const userBookRating = props.userBookRating
     const onRate = (e) => {
         const id = e.target.id
         const rating = id.slice(1)
@@ -10,23 +11,21 @@ const RatingWidget = (props) => {
         }
     }
     return (
-        <div>
-            <div className={styles.rating}>
-                <input onClick={onRate} type="radio" name="rating" id="r5" />
-                <label htmlFor="r5"></label>
-
-                <input onClick={onRate} type="radio" name="rating" id="r4" />
-                <label htmlFor="r4"></label>
-
-                <input onClick={onRate} type="radio" name="rating" id="r3" />
-                <label htmlFor="r3"></label>
-
-                <input onClick={onRate} type="radio" name="rating" id="r2" />
-                <label htmlFor="r2"></label>
-
-                <input onClick={onRate} type="radio" name="rating" id="r1" />
-                <label htmlFor="r1"></label>
-            </div>
+        <div className={styles.rating}>
+            {[5, 4, 3, 2, 1].map((num) => {
+                return (
+                    <React.Fragment key={num}>
+                        <input
+                            checked={userBookRating === num}
+                            onChange={onRate}
+                            type="radio"
+                            name="rating"
+                            id={'r' + num}
+                        />
+                        <label htmlFor={'r' + num}></label>
+                    </React.Fragment>
+                )
+            })}
         </div>
     )
 }

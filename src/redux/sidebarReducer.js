@@ -23,9 +23,13 @@ const setReadingBook = (book) => {
 export const setCurrentBook = (bookId) => {
     return (dispatch) => {
         const bookJSON = getBookData(bookId)
-        Promise.all([bookJSON]).then((values) => {
-            dispatch(setReadingBook(...values))
-        })
+        Promise.all([bookJSON])
+            .then((values) => {
+                dispatch(setReadingBook(...values))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 export default sidebarReducer

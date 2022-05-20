@@ -1,0 +1,16 @@
+.firstRow{
+    background-color: grey;
+}
+.tableLi{
+   margin: 10px;
+   list-style-type: none;
+   display: flex;
+   justify-content: space-between;
+
+}
+.item{
+    margin: 10px;
+}
+.table{
+    border: 2px solid black;
+}

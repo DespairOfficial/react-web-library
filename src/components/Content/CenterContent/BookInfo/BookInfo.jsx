@@ -42,6 +42,12 @@ const BookInfo = (props) => {
                         </div>
                         <div>
                             <RatingWidget
+                                userBookRating={
+                                    props.book.rating.userBookRating
+                                        ? props.book.rating.userBookRating
+                                              .rating
+                                        : 0
+                                }
                                 bookId={props.book.id}
                                 setCurrentBookRating={
                                     props.setCurrentBookRating

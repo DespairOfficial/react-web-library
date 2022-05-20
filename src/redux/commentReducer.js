@@ -66,16 +66,24 @@ const removeComment = (commentId) => {
 
 export const addNewComment = (bookId, text) => {
     return (dispatch) => {
-        leaveAComment(bookId, text).then((data) => {
-            dispatch(addComment(data.newComment))
-        })
+        leaveAComment(bookId, text)
+            .then((data) => {
+                dispatch(addComment(data.newComment))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 export const setBookComments = (bookId) => {
     return (dispatch) => {
-        getCommentsByBook(bookId).then((comments) => {
-            dispatch(setComments(comments))
-        })
+        getCommentsByBook(bookId)
+            .then((comments) => {
+                dispatch(setComments(comments))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 export const updateNewCommentText = (text) => {
@@ -85,13 +93,17 @@ export const updateNewCommentText = (text) => {
 }
 export const removeCommentById = (commentId) => {
     return (dispatch) => {
-        removeBookCommentById(commentId).then((data) => {
-            if (data.status === 0) {
-                dispatch(removeComment(commentId))
-            } else {
-                alert('Вы не можете удалить этот комментарий')
-            }
-        })
+        removeBookCommentById(commentId)
+            .then((data) => {
+                if (data.status === 0) {
+                    dispatch(removeComment(commentId))
+                } else {
+                    alert('Вы не можете удалить этот комментарий')
+                }
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 export default commentReducer

@@ -28,6 +28,11 @@ const Book = (props) => {
                             <button>Описание</button>
                         </NavLink>
                     </div>
+                    <div className={styles.read}>
+                        <NavLink to={'/readingRoom/' + props.id}>
+                            <button>Читать</button>
+                        </NavLink>
+                    </div>
                 </div>
             </div>
         </section>

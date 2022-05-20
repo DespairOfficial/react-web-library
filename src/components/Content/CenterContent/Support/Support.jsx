@@ -1,12 +1,9 @@
 import React from 'react'
-import styles from './Dialogs.module.css'
-import DialogsItemsContainer from './DialogsItems/DialogsItemsContainer'
 import MessagesContainer from './Messages/MessagesContainer'
-
+import styles from './Support.module.css'
 const Dialogs = () => {
     return (
         <div className={styles.dialogs}>
-            <DialogsItemsContainer />
             <MessagesContainer />
         </div>
     )

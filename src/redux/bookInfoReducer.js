@@ -32,15 +32,23 @@ export const setCurrentBookInfo = (bookId) => {
     return (dispatch) => {
         const rateBookInfo = getBookRating(bookId)
         const mainBookInfo = getBookData(bookId)
-        Promise.all([mainBookInfo, rateBookInfo]).then((values) => {
-            dispatch(setBookInfo(...values))
-        })
+        Promise.all([mainBookInfo, rateBookInfo])
+            .then((values) => {
+                dispatch(setBookInfo(...values))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 export const setCurrentBookRating = (bookId, rating) => {
     return (dispatch) => {
-        rateBook(bookId, rating).then(() => {
-            dispatch(setCurrentBookInfo(bookId))
-        })
+        rateBook(bookId, rating)
+            .then(() => {
+                dispatch(setCurrentBookInfo(bookId))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }

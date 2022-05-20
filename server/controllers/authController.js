@@ -10,7 +10,6 @@ const generateAccessToken = (id, role, email) => {
 }
 class authController {
     async registration(req, res) {
-        res.set('Access-Control-Allow-Origin', '*')
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
@@ -33,13 +32,12 @@ class authController {
             await db.query(
                 `INSERT INTO users (name, email, password, role) VALUES('${username}','${email}', '${hashedPassword}', '${defaultRole}')`
             )
-            res.set('Access-Control-Allow-Origin', '*')
+
             return res.json('User successfully created')
         } catch (e) {}
     }
     async login(req, res) {
         try {
-            res.set('Access-Control-Allow-Origin', '*')
             const { email, password } = req.body
             const user = (
                 await db.query(`SELECT * FROM users WHERE email = '${email}'`)

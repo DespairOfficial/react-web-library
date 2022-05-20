@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './Login.module.css'
+import styles from './Login.module.scss'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
@@ -21,6 +21,14 @@ const Login = (props) => {
         'Username cannot be empty'
     )
     const [isFormValid, setIsFormValid] = useState(false)
+    useEffect(() => {
+        if (emailError || passwordError || usernameError) {
+            setIsFormValid(false)
+        } else {
+            setIsFormValid(true)
+        }
+    }, [emailError, passwordError, usernameError])
+
     const BlurHandler = (e) => {
         switch (e.target.name) {
             case 'email':
@@ -49,7 +57,7 @@ const Login = (props) => {
     const usernameHandler = (e) => {
         setUsername(e.target.value)
         if (!e.target.value) {
-            setUsernameError('Password cannot be empty')
+            setUsernameError('Username cannot be empty')
         } else {
             setUsernameError('')
         }
@@ -65,13 +73,6 @@ const Login = (props) => {
             setPasswordError('')
         }
     }
-    useEffect(() => {
-        if (emailError || passwordError || usernameError) {
-            setIsFormValid(false)
-        } else {
-            setIsFormValid(true)
-        }
-    }, [emailError, passwordError, usernameError])
 
     const auth = (e) => {
         try {
@@ -84,6 +85,7 @@ const Login = (props) => {
                 },
                 isLogin
             )
+
             navigate('/books')
         } catch (e) {
             alert(e.response.data.message)
@@ -95,10 +97,12 @@ const Login = (props) => {
                 <p> {isLogin ? 'Authorization' : 'Registration'}</p>
                 <form action="">
                     <div className={styles.form}>
-                        {usernameDirty && usernameError && (
+                        {usernameDirty && usernameError ? (
                             <div style={{ color: 'red' }}>{usernameError}</div>
+                        ) : (
+                            <div className={styles.pseudoLabel}>Username</div>
                         )}
-                        <label htmlFor="usernameInput">Username</label>
+
                         <input
                             onChange={(e) => {
                                 usernameHandler(e)
@@ -110,10 +114,12 @@ const Login = (props) => {
                             type="text"
                             placeholder="Username"
                         />
-                        {emailDirty && emailError && (
+                        {emailDirty && emailError ? (
                             <div style={{ color: 'red' }}>{emailError}</div>
+                        ) : (
+                            <div className={styles.pseudoLabel}>Email</div>
                         )}
-                        <label htmlFor="emailInput">Email</label>
+
                         <input
                             onChange={(e) => emailHandler(e)}
                             onBlur={(e) => BlurHandler(e)}
@@ -123,17 +129,18 @@ const Login = (props) => {
                             type="text"
                             placeholder="Email"
                         />
-                        {passwordDirty && passwordError && (
+                        {passwordDirty && passwordError ? (
                             <div style={{ color: 'red' }}>{passwordError}</div>
+                        ) : (
+                            <div className={styles.pseudoLabel}>Password</div>
                         )}
-                        <label htmlFor="passwordInput">Password</label>
                         <input
                             onChange={(e) => passwordHandler(e)}
                             value={password}
                             onBlur={(e) => BlurHandler(e)}
                             id="passwordInput"
                             name="password"
-                            type="text"
+                            type="password"
                             placeholder="Password"
                         />
                     </div>

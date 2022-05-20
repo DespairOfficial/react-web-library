@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './JumpToPage.module.css'
 const JumpToPage = (props) => {
-    const [newPage, setNewPage] = useState(1)
+    const [newPage, setNewPage] = useState(0)
     const [errorMessage, setErrorMessage] = useState('')
 
     const onChangeNewPage = (e) => {

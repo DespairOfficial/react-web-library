@@ -73,3 +73,8 @@ export const removeBookCommentById = (commentId) => {
         return response.data
     })
 }
+export const setLastReadedPage = (bookId, lastPageReaded) => {
+    return $authHost
+        .put(`/books/${bookId}/setLastReadedPage/${lastPageReaded}`)
+        .then((response) => response.data)
+}

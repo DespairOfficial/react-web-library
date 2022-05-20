@@ -53,6 +53,14 @@ class booksController {
                 `SELECT * FROM users_books_bought where book_id='${bookId}' and user_id='${user_id}' `
             )
         ).rows[0]
+        const lastPageReadedQuery = await db.query(
+            `SELECT page FROM user_book_page where book_id='${bookId}' and user_id='${user_id}' `
+        )
+        let lastReadedPage = 1
+        if (lastPageReadedQuery.rows.length) {
+            lastReadedPage = lastPageReadedQuery.rows[0].page
+        }
+
         const book = (
             await db.query(`SELECT * FROM books where id='${bookId}'`)
         ).rows[0]
@@ -60,7 +68,7 @@ class booksController {
         if (bookBought) {
             isBookBought = true
         }
-        res.send({ ...book, isBookBought })
+        res.send({ ...book, isBookBought, lastReadedPage })
     }
     async getPdfById(req, res) {
         const bookId = req.params.bookId
@@ -145,7 +153,7 @@ class booksController {
         const { id: user_id } = req.user
         const userBookRating = (
             await db.query(
-                `SELECT rating FROM users_books_rated WHERE book_id = '${bookId}' and user_id = ${user_id}`
+                `SELECT rating FROM users_books_rated WHERE book_id = '${bookId}' and user_id = '${user_id}'`
             )
         ).rows[0]
         const avgRating = (
@@ -228,16 +236,37 @@ class booksController {
         const commentId = req.params.commentId
         const { id: userId } = req.user
         const queryForUserId = await db.query(
-            `SELECT user_id FROM users_books_comments WHERE id = ${commentId}`
+            `SELECT user_id FROM users_books_comments WHERE id = '${commentId}'`
         )
         const user_id = queryForUserId.rows[0].user_id
         if (user_id === userId) {
             await db.query(
-                `DELETE FROM users_books_comments WHERE id = ${commentId}`
+                `DELETE FROM users_books_comments WHERE id = '${commentId}'`
             )
             res.send({ status: 0, message: 'Removed' })
         } else {
             res.send({ status: 1, message: 'You have no rights for this' })
+        }
+    }
+    async setLastReadedPage(req, res) {
+        const { id: userId } = req.user
+        const bookId = req.params.bookId
+        const page = req.params.lastPageReaded
+        const isBookReaded = await db.query(
+            `SELECT * FROM user_book_page WHERE user_id = ${userId} AND book_id = ${bookId}`
+        )
+
+        if (isBookReaded.rows.length) {
+            await db.query(
+                `UPDATE  user_book_page SET page = '${page}' WHERE  user_id = '${userId}' AND book_id = '${bookId}' `
+            )
+
+            res.send({ message: 'Page was changed succesfully' })
+        } else {
+            await db.query(
+                `INSERT INTO user_book_page (user_id, book_id, page) VALUES ('${userId}' , '${bookId}' , '${page}')`
+            )
+            res.send({ message: 'Page was settled succesfully' })
         }
     }
 }

@@ -6,6 +6,7 @@ let initialState = {
     email: null,
     username: null,
     isFetching: true,
+    role: null,
     isAuth: false,
 }
 const authReducer = (state = initialState, action) => {
@@ -27,6 +28,7 @@ const authReducer = (state = initialState, action) => {
                 email: null,
                 username: null,
                 isFetching: true,
+                role: null,
                 isAuth: false,
             }
         }
@@ -42,7 +44,6 @@ const setAuth = (isAuth) => {
     return { type: SET_AUTH, isAuth }
 }
 const LogOut = () => {
-    debugger
     return { type: LOG_OUT }
 }
 export const setCurrentUserData = (userData, isLogin) => {
@@ -50,14 +51,19 @@ export const setCurrentUserData = (userData, isLogin) => {
         ;(isLogin
             ? login(userData.email, userData.password, userData.username)
             : registration(userData.email, userData.password, userData.username)
-        ).then(() => {
-            dispatch(
-                setUserData({
-                    email: userData.email,
-                    username: userData.username,
-                })
-            )
-        })
+        )
+            .then((data) => {
+                dispatch(
+                    setUserData({
+                        email: data.email,
+                        username: userData.username,
+                        role: data.role,
+                    })
+                )
+            })
+            .catch((error) => {
+                alert(error.response.data.message)
+            })
     }
 }
 export const checkIsAuth = () => {

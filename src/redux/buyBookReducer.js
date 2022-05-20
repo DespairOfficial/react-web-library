@@ -25,8 +25,12 @@ const setBookToBuy = (book) => {
 
 export const setCurrentBookToBuy = (bookId) => {
     return (dispatch) => {
-        getBookData(bookId).then((data) => {
-            dispatch(setBookToBuy(data))
-        })
+        getBookData(bookId)
+            .then((data) => {
+                dispatch(setBookToBuy(data))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }

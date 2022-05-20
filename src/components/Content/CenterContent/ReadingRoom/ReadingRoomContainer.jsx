@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { setCurrentBook } from '../../../../redux/readingRoomReducer'
+import {
+    setCurrentBook,
+    confirmLastReadedPage,
+} from '../../../../redux/readingRoomReducer'
 import ReadingRoom from './ReadingRoom'
 
 const ReadingRoomAPI = (props) => {
@@ -13,6 +16,7 @@ const ReadingRoomAPI = (props) => {
             props.setCurrentBook(bookId[0])
         }
     }, [])
+
     return <ReadingRoom {...props} />
 }
 
@@ -20,4 +24,7 @@ let mapStateToProps = (state) => ({
     book: state.readingRoomPage.book,
 })
 
-export default connect(mapStateToProps, { setCurrentBook })(ReadingRoomAPI)
+export default connect(mapStateToProps, {
+    setCurrentBook,
+    confirmLastReadedPage,
+})(ReadingRoomAPI)

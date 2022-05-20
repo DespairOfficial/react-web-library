@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './BookReading.module.css'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 import JumpToPage from './JumpToPage/JumpToPage'
@@ -6,6 +6,15 @@ import JumpToPage from './JumpToPage/JumpToPage'
 const BookReading = (props) => {
     const [numPages, setNumPages] = useState(null)
     const [pageNumber, setPageNumber] = useState(1)
+    console.log(pageNumber)
+    useEffect(() => {
+        if (pageNumber !== 1) {
+            props.confirmLastReadedPage(props.book.id, pageNumber)
+        }
+    }, [pageNumber])
+    useEffect(() => {
+        setPageNumber(props.book.lastReadedPage)
+    }, [props.book.id])
     let isLastPage = false
 
     const pdf = props.book.pdf
@@ -25,7 +34,6 @@ const BookReading = (props) => {
     }
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages)
-        setPageNumber(1)
     }
     function changePage(offset) {
         setPageNumber((prevPageNumber) => prevPageNumber + offset)
@@ -80,7 +88,10 @@ const BookReading = (props) => {
                 </button>
             </div>
             <div>
-                <JumpToPage jumpToExactPage={jumpToExactPage} />
+                <JumpToPage
+                    jumpToExactPage={jumpToExactPage}
+                    lastReadedPage={props.book.lastReadedPage}
+                />
             </div>
             <div className={styles.book}>
                 {pdfOrEndOfTrial()}

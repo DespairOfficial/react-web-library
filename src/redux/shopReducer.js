@@ -64,18 +64,30 @@ const setFilter = (filter) => {
 }
 export const getCurrentBooks = (currentPage, pageSize, filter) => {
     return (dispatch) => {
-        getBooks(currentPage, pageSize, filter).then((data) => {
-            dispatch(setTotalBooksCount(data.booksCount))
-            dispatch(setBooks(data.books))
-            dispatch(setCurrentPage(currentPage))
-        })
+        getBooks(currentPage, pageSize, filter)
+            .then((data) => {
+                dispatch(setTotalBooksCount(data.booksCount))
+                dispatch(setBooks(data.books))
+                dispatch(setCurrentPage(currentPage))
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 
 export const toggleBookCard = (bookId, isInCard) => {
     return (dispatch) => {
         dispatch(toggleAddToCard(bookId))
-        isInCard ? removeBookFromCard(bookId) : addBookToCard(bookId) // query to back
+        if (isInCard) {
+            removeBookFromCard(bookId).catch((error) => {
+                console.log(error.response.data.message)
+            })
+        } else {
+            addBookToCard(bookId).catch((error) => {
+                console.log(error.response.data.message)
+            })
+        }
     }
 }
 export const setSearchFilter = (filter) => {

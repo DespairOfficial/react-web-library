@@ -5,7 +5,7 @@ const SET_GRATITUDE = 'SET-GRATITUDE'
 const initialState = {
     currentDonation: 0,
     sumOfFees: 0,
-    purpose: 100,
+    purpose: 200,
     isShowingGratitude: false,
 }
 const donationReducer = (state = initialState, action) => {
@@ -43,12 +43,16 @@ export const setSumOfFees = () => {
 }
 export const donation = (value) => {
     return (dispatch) => {
-        donate(value).then((data) => {
-            if (data.status === 0) {
-                dispatch(setDonate(value))
-                dispatch(setSumOfFees())
-            }
-        })
+        donate(value)
+            .then((data) => {
+                if (data.status === 0) {
+                    dispatch(setDonate(value))
+                    dispatch(setSumOfFees())
+                }
+            })
+            .catch((error) => {
+                console.log(error.response.data.message)
+            })
     }
 }
 export const showGratitude = (isShowing) => {

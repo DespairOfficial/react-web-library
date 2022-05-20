@@ -37,11 +37,11 @@ const BookUserRating = (props) => {
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
                 />
 
-                <span className={styles.heading}>User Rating</span>
+                <span className={styles.heading}>Пользовательские оценки</span>
                 <p>
                     {parseFloat(props.bookRating.avgRating.avg).toFixed(1)}{' '}
-                    average based on {props.bookRating.ratesCount.count}{' '}
-                    reviews.
+                    средняя оценка, на основе{' '}
+                    {props.bookRating.ratesCount.count} отзывов.
                 </p>
 
                 <div>{drawRateRow()}</div>
