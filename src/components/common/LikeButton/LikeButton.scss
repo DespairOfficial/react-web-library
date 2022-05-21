@@ -2,9 +2,6 @@
     .main-content{
         display: flex;
     }
-
-
-
     svg{
         cursor:pointer; overflow:visible; width:80px;
         .heart{transform-origin:center; animation:animateHeartOut .3s linear forwards;}

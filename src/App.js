@@ -17,7 +17,7 @@ const App = (props) => {
         if (userdata.role === 'ADMIN') {
             return <AdminContent />
         } else {
-            return <Content />
+            return <Content userdata={userdata} />
         }
     }
     props.checkIsAuth()

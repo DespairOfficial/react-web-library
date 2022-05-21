@@ -16,8 +16,14 @@ const Content = (props) => {
                 isShowingNavBar={isShowingNavBar}
             />
 
-            <CenterContent isShowingNavBar={isShowingNavBar} />
-            <Sidebar isShowingNavBar={isShowingNavBar} />
+            <CenterContent
+                isShowingNavBar={isShowingNavBar}
+                userdata={props.userdata}
+            />
+            <Sidebar
+                isShowingNavBar={isShowingNavBar}
+                userdata={props.userdata}
+            />
         </div>
     )
 }

@@ -1,0 +1,19 @@
+.profileInfo{
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+}
+.userdata{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+.userlogo {
+    height: 15%;
+    width: 15%;
+    margin: 10px;
+}
+.userlogo img{
+    height: 100%;
+    width: 100%;
+}

@@ -26,7 +26,11 @@ const ReadingSideBar = (props) => {
             </div>
         )
     } else {
-        return <Preloader />
+        return (
+            <div className={styles.preloader}>
+                <Preloader />
+            </div>
+        )
     }
 }
 

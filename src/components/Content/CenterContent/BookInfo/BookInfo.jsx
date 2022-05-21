@@ -5,13 +5,18 @@ import RatingWidget from '../../../common/RatingWidget/RatingWidget'
 import BookUserRating from '../../../common/BookUserRating/BookUserRating'
 import { NavLink } from 'react-router-dom'
 import CommentSection from './CommentSection/CommentSectionContainer'
+
 const BookInfo = (props) => {
     const buyOrRead = (id) => {
         if (props.book.is_free || props.isBookBought) {
             return (
                 <div>
                     <NavLink to={'/readingRoom/' + id}>
-                        <button>Читать</button>
+                        <button
+                            className={styles.fill + ' ' + styles.readButton}
+                        >
+                            Читать
+                        </button>
                     </NavLink>
                 </div>
             )
@@ -19,7 +24,11 @@ const BookInfo = (props) => {
             return (
                 <div>
                     <NavLink to={'/buy/' + id}>
-                        <button>Купить</button>
+                        <button
+                            className={styles.fill + ' ' + styles.buyButton}
+                        >
+                            Купить
+                        </button>
                     </NavLink>
                 </div>
             )
@@ -37,10 +46,11 @@ const BookInfo = (props) => {
                         </p>
                     </div>
                     <div className={styles.additionalInfo}>
-                        <div>
+                        <div className={styles.description}>
                             <p>{props.book.text}</p>
                         </div>
-                        <div>
+
+                        <div className={styles.ratingWidget}>
                             <RatingWidget
                                 userBookRating={
                                     props.book.rating.userBookRating
@@ -57,9 +67,12 @@ const BookInfo = (props) => {
                         <div>
                             <BookUserRating bookRating={props.book.rating} />
                         </div>
-                        <div>{buyOrRead(props.book.id)}</div>
+                        <div className={styles.buyOrRead}>
+                            {buyOrRead(props.book.id)}
+                        </div>
                     </div>
                 </div>
+
                 <div>
                     <CommentSection bookId={props.book.id} />
                 </div>

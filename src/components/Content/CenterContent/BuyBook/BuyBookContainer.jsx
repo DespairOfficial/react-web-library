@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import BuyBook from './BuyBook'
 import { connect } from 'react-redux'
 import { setCurrentBookToBuy } from '../../../../redux/buyBookReducer'
-import { buyBook, getBougthBooks } from '../../../../http/booksAPI'
+import { buyBook, getBoughtBooksIds } from '../../../../http/booksAPI'
 import { useNavigate } from 'react-router-dom'
 const BuyBookContainer = (props) => {
     const navigate = useNavigate()
@@ -12,8 +12,8 @@ const BuyBookContainer = (props) => {
         let pattern = /(?<=\/buy\/)[\w+.-]+/
         let bookId = text.match(pattern)
         if (bookId) {
-            getBougthBooks().then((data) => {
-                const isBought = data.booksBougth.some((element) => {
+            getBoughtBooksIds().then((data) => {
+                const isBought = data.booksBought.some((element) => {
                     return bookId[0] === element.book_id.toString()
                 })
                 if (isBought) {

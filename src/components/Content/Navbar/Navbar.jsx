@@ -21,26 +21,23 @@ const Navbar = (props) => {
                     onMouseOver={onToggleNavBar}
                 ></div>
                 <div className={styles.menu_title}>
-                    Menu
+                    Меню
                     <hr />
                 </div>
 
                 <div className={styles.menu_list}>
                     <NavLink to="/profile" className={isActive}>
-                        Profile
+                        Профиль
                     </NavLink>
                     <NavLink to="/readingRoom" className={isActive}>
-                        Reading room
+                        Читать
                     </NavLink>
 
                     <NavLink to="/books" className={isActive}>
-                        Books
+                        Книги
                     </NavLink>
                     <NavLink to="/donate" className={isActive}>
-                        Donate
-                    </NavLink>
-                    <NavLink to="/support" className={isActive}>
-                        Support
+                        Поддержка
                     </NavLink>
                 </div>
             </div>

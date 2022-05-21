@@ -51,8 +51,8 @@ export const buyBook = (bookId) => {
         return response.data
     })
 }
-export const getBougthBooks = () => {
-    return $authHost.get(`/books/bought`).then((response) => {
+export const getBoughtBooksIds = () => {
+    return $authHost.get(`/books/boughtIds`).then((response) => {
         return response.data
     })
 }
@@ -77,4 +77,14 @@ export const setLastReadedPage = (bookId, lastPageReaded) => {
     return $authHost
         .put(`/books/${bookId}/setLastReadedPage/${lastPageReaded}`)
         .then((response) => response.data)
+}
+export const getFavorites = () => {
+    return $authHost.get(`/books/favorites`).then((response) => {
+        return response.data
+    })
+}
+export const getBoughtBooks = () => {
+    return $authHost.get(`/books/bought`).then((response) => {
+        return response.data
+    })
 }

@@ -11,21 +11,24 @@ const RatingWidget = (props) => {
         }
     }
     return (
-        <div className={styles.rating}>
-            {[5, 4, 3, 2, 1].map((num) => {
-                return (
-                    <React.Fragment key={num}>
-                        <input
-                            checked={userBookRating === num}
-                            onChange={onRate}
-                            type="radio"
-                            name="rating"
-                            id={'r' + num}
-                        />
-                        <label htmlFor={'r' + num}></label>
-                    </React.Fragment>
-                )
-            })}
+        <div className={styles.ratingWrapper}>
+            <span>Оцените эту книгу</span>
+            <div className={styles.rating}>
+                {[5, 4, 3, 2, 1].map((num) => {
+                    return (
+                        <React.Fragment key={num}>
+                            <input
+                                checked={userBookRating === num}
+                                onChange={onRate}
+                                type="radio"
+                                name="rating"
+                                id={'r' + num}
+                            />
+                            <label htmlFor={'r' + num}></label>
+                        </React.Fragment>
+                    )
+                })}
+            </div>
         </div>
     )
 }

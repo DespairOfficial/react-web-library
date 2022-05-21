@@ -10,6 +10,7 @@ import buyBookReducer from './buyBookReducer'
 import BookInfoReducer from './bookInfoReducer'
 import donationReducer from './donationReducer'
 import adminReducer from './_DEPRECATED_adminReducer'
+import profileReducer from './profileReducer'
 let reducers = combineReducers({
     commentPage: commentReducer,
     dialogsPage: dialogReducer,
@@ -21,6 +22,7 @@ let reducers = combineReducers({
     bookInfo: BookInfoReducer,
     donation: donationReducer,
     admin: adminReducer,
+    profile: profileReducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware))

@@ -2,7 +2,7 @@
     position: fixed;
     right: 0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: calc(20% - 20px);
+    width: 20%;
     display: flex;
     background: white;
     justify-content: center;

@@ -18,7 +18,10 @@ const CenterContent = (props) => {
             }
         >
             <Routes>
-                <Route path="profile" element={<ProfileContainer />} />
+                <Route
+                    path="profile/*"
+                    element={<ProfileContainer userdata={props.userdata} />}
+                />
                 <Route
                     path="readingRoom/*"
                     element={<ReadingRoomContainer />}

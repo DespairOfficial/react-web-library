@@ -1,10 +1,13 @@
 import React from 'react'
 import Profile from './Profile'
+import { connect } from 'react-redux'
 
-class ProfileContainer extends React.Component {
-    componentDidMount() {}
-    render() {
-        return <Profile {...this.props} />
+const ProfileContainer = (props) => {
+    return <Profile {...props} />
+}
+const mapStateToProps = (state) => {
+    return {
+        books: state.profile.books,
     }
 }
-export default ProfileContainer
+export default connect(mapStateToProps, {})(ProfileContainer)

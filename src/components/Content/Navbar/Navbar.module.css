@@ -11,9 +11,11 @@
 }
 a {
   text-decoration: none;
+  transition: 0.5s;
 }
 a:hover {
     text-decoration: underline;
+    transition: 0.5s;
 }
 .menu_wrapper{
     font-size: 1.5rem;    
@@ -35,6 +37,7 @@ a:hover {
 }
 .menu_title{
     text-align: center;
+    font-weight: 700;
     color: #f29d16;
     margin-top: 30px;
     font-size: 2rem;

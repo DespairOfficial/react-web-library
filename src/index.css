@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 html, body{
     margin: 0;
     background: #f5f7f8;
@@ -17,7 +17,7 @@ html, body{
     
 }
 
-html, body, h1, h2, h3, h4, h5 { font-family: 'Macondo', cursive;}
+html, body, h1, h2, h3, h4, h5 { font-family: 'Comfortaa', cursive;}
 
 
 

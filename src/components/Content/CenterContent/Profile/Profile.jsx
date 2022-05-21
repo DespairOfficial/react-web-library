@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import MyBooksContainer from './MyBooksContainer/MyBooksContainer'
-const MyProfile = () => {
+import MyBooks from './MyBooks/MyBooks'
+const MyProfile = (props) => {
     return (
         <div>
-            <ProfileInfo />
-            <MyBooksContainer />
+            <ProfileInfo userdata={props.userdata} />
+            <MyBooks books={props.books} />
         </div>
     )
 }

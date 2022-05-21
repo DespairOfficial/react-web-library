@@ -16,11 +16,17 @@ const CommentSection = (props) => {
     return (
         <div className={styles.commentSection}>
             <div className={styles.sendSection}>
-                <input
+                <textarea
+                    placeholder="Что вы думаете об этой книге?"
                     value={props.newCommentText}
                     onChange={onTextAreaChange}
                 />
-                <button onClick={onAddComment}>Send</button>
+                <button
+                    className={styles.fill + ' ' + styles.sendButton}
+                    onClick={onAddComment}
+                >
+                    Send
+                </button>
             </div>
             <div>
                 <div>

@@ -1,0 +1,13 @@
+.content p {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 100px 0 10px;
+    
+}
+.books{
+    margin: 10px;
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

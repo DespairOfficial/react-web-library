@@ -2,6 +2,8 @@ import React from 'react'
 import styles from './BooksFilter.module.css'
 import { connect } from 'react-redux'
 import { setSearchFilter, getCurrentBooks } from '../../../../redux/shopReducer'
+import search from '../../../../assets/images/search.png'
+import Navigation from '../Navigation/Navigation'
 const BooksFilter = (props) => {
     const onFilterChange = (e) => {
         const filter = e.target.value
@@ -10,18 +12,13 @@ const BooksFilter = (props) => {
     }
     return (
         <div className={styles.filter}>
-            Filter
+            <div className={styles.title}>Поиск</div>
+
             <div className={styles.search}>
+                <img src={search} alt="Search" />
                 <input type="text" onChange={onFilterChange} />
             </div>
-            <div className={styles.dropdown}>
-                <button className={styles.dropbtn}>Dropdown</button>
-                <div className={styles.dropdown_content}>
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
-            </div>
+            <Navigation />
         </div>
     )
 }

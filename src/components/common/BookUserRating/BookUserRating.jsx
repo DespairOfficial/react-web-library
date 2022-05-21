@@ -6,12 +6,15 @@ const BookUserRating = (props) => {
             return (
                 <div className={styles.row} key={i}>
                     <div className={styles.side}>
-                        <div>{row.rating} ☆</div>
+                        <div>
+                            {row.rating}
+                            <span className={styles.star}>★</span>
+                        </div>
                     </div>
                     <div className={styles.middle}>
                         <div className={styles.barcontainer}>
                             <div
-                                className={styles.bar}
+                                className={styles[`bar_${row.rating}`]}
                                 style={{
                                     width:
                                         (row.count /
@@ -31,7 +34,7 @@ const BookUserRating = (props) => {
     }
     if (props.bookRating.avgRating && props.bookRating.ratingTable) {
         return (
-            <div>
+            <div className={styles.userRating}>
                 <link
                     rel="stylesheet"
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -39,11 +42,23 @@ const BookUserRating = (props) => {
 
                 <span className={styles.heading}>Пользовательские оценки</span>
                 <p>
-                    {parseFloat(props.bookRating.avgRating.avg).toFixed(1)}{' '}
-                    средняя оценка, на основе{' '}
-                    {props.bookRating.ratesCount.count} отзывов.
+                    {'Cредняя оценка, на основе ' +
+                        props.bookRating.ratesCount.count +
+                        ' отзывов:'}
                 </p>
-
+                <div
+                    className={
+                        styles.avgRating +
+                        ' ' +
+                        styles[
+                            `rateColor_${Math.floor(
+                                props.bookRating.avgRating.avg
+                            )}`
+                        ]
+                    }
+                >
+                    {parseFloat(props.bookRating.avgRating.avg).toFixed(2)}
+                </div>
                 <div>{drawRateRow()}</div>
             </div>
         )

@@ -1,43 +1,54 @@
-.bookInfo{
-    padding: 20px;
-    display: flex;
 
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 .book {
-    width: 200px;
-    padding: 10px;
-    
+    font-family: 'Roboto Mono', monospace;
 
+    position: relative;
+    padding: 25px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.like{
+    position: absolute;
+    right: 0px;
+    top: 0px;
 }
 .book img {
-    width: 200px;
-    height: 250px;
+    width: 225px;
+    height: 325px;
 }
-
-.title {
-    font-weight: 900;
+.book:hover {
+    box-shadow: 0 0 8px 1px rgb(180, 180, 180);
 }
-
-.additionalInfo{
-    width: 100%;
-    margin-left: 10px;
-    padding: 10px;
+.mainInfo{
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    
 }
-.additionalInfo .description{
-    padding: 20px;
+.title {
 
+    font-weight: bold;
+    text-align: center;
     
 }
-.buyOrRead{
-    margin: 20px;
-    width: 200px;
+
+.buttons{
+    display: flex;
+
 }
-.ratingWidget{
-    margin-bottom: 20px;
+
+.read{
+    margin: 10px;
 }
+.description{
+    margin: 10px;
+}
+
+
 .fill {
     font-family: 'Roboto Mono', monospace;
     font-size: 1rem;
@@ -70,7 +81,4 @@
   }
 .readButton::after{
     background-color: #f29d16;
-}
-.buyButton::after{
-    background-color: #3498db;
 }

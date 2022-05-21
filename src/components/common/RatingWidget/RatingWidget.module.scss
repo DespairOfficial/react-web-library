@@ -1,3 +1,4 @@
+
 @mixin star-rating( $filled-color: #F9BF3B, $empty-color: #444, $size: 40px, $width: 200px) {
     $star--filled: ★;
     $star--empty: ☆;
@@ -59,7 +60,13 @@
    }
    
    .rating {
+    
     @include star-rating();
-   }
 
+   }
+   .ratingWrapper{
+        span{
+            font-size: 1.5rem;
+        }
+   }
    
