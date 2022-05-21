@@ -193,14 +193,14 @@ class booksController {
             res.send({ status: 0, message: 'Bought succesfully' })
         }
     }
-    async getBoughtBooks(req, res) {
+    async getBoughtBooksIds(req, res) {
         const { id: user_id } = req.user
         const books = (
             await db.query(
                 `SELECT book_id from users_books_bought WHERE user_id= '${user_id}'`
             )
         ).rows
-        res.send({ booksBougth: books })
+        res.send({ booksBought: books })
     }
     async getCommentsByBook(req, res) {
         const bookId = req.params.bookId
@@ -268,6 +268,22 @@ class booksController {
             )
             res.send({ message: 'Page was settled succesfully' })
         }
+    }
+    async getFavoriteBooksByUser(req, res) {
+        const { id: userId } = req.user
+        const books = await db.query(
+            `select books.id, books.title, books.authors, books.image from users_books_added   JOIN books on users_books_added.book_id = books.id where user_id ='${userId}' `
+        )
+        res.send({ books: books.rows })
+    }
+    async getBoughtBooks(req, res) {
+        const { id: user_id } = req.user
+        const books = (
+            await db.query(
+                `SELECT users_books_bought.book_id, books.title, books.authors, books.image from users_books_bought JOIN books on users_books_bought.book_id = books.id WHERE user_id= '${user_id}'`
+            )
+        ).rows
+        res.send({ booksBought: books })
     }
 }
 module.exports = new booksController()

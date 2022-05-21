@@ -19,8 +19,9 @@ router.get('/pdf/:bookId', controller.getPdfById)
 router.get('/rating/:bookId', controller.getBookRating)
 router.get('/buyBook/:bookId', controller.buyBook)
 router.get('/bought', controller.getBoughtBooks)
+router.get('/boughtIds', controller.getBoughtBooksIds)
 router.get('/comments/:bookId', controller.getCommentsByBook)
-
+router.get('/favorites', controller.getFavoriteBooksByUser)
 router.get('/:bookId', controller.getBookById)
 
 module.exports = router
